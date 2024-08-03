@@ -43,6 +43,17 @@
             width: 2px;
             background-color: white;
         }
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: none;
+            z-index: 2;
+            transition: all 0.2s;
+        }
         #addButton, #exportButton {
             position: absolute;
             top: 10px;
@@ -165,6 +176,7 @@
     </style>
 </head>
 <body>
+    <div id="overlay"></div>
     <div class="container" id="canvasContainer">
         <div class="horizontal-line"></div>
         <div class="vertical-line"></div>
@@ -189,6 +201,7 @@
         const prompt = document.getElementById('prompt');
         const closeButton = document.getElementById('closeButton');
         const enterButton = document.getElementById('enterButton');
+        const overlay = document.getElementById('overlay');
         const imageInput = document.getElementById('imageInput');
         const TheInput = document.getElementById('Inputter');
         const promptText = document.getElementById('promptText');
@@ -216,12 +229,16 @@
             prompt.style.display = 'block';
             prompt.style.transform = 'translate(-50%, -50%) scale(0.9)';
             prompt.style.opacity = '0';
+
+            overlay.style.display = 'block';
+            overlay.style.opacity = '0';
             
             prompt.offsetHeight;
 
             requestAnimationFrame(() => {
                 prompt.style.transform = 'translate(-50%, -50%) scale(1)';
                 prompt.style.opacity = '1';
+                overlay.style.opacity = '1';
             });
         }
 
@@ -229,9 +246,13 @@
             clearTimeout(animationTimeout);
             prompt.style.transform = 'translate(-50%, -50%) scale(0.9)';
             prompt.style.opacity = '0';
+
+            overlay.style.display = 'block';
+            overlay.style.opacity = '0';
             
             animationTimeout = setTimeout(() => {
                 prompt.style.display = 'none';
+                overlay.style.display = 'none';
             }, 200);
         }
 
