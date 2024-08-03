@@ -194,7 +194,7 @@
 
         function getPromptInputText()
         {
-            return TheInput.textContent;
+            return TheInput.value;
         }
 
         function openPrompt(title, buttonText, buttonAction, text, inputText) {
@@ -322,11 +322,11 @@
 
             openPrompt("File Name", "Enter", () => {
                 closePrompt();
-                openPrompt("Exported", "Ok, Yippee!", closePrompt, "Your canvas was successfully exported to your device.");
+                openPrompt("Exported", "Okay, Yippee!", closePrompt, "Your canvas was successfully exported to your device.");
                 const link = document.createElement('a');
                 link.download = getPromptInputText() || "made by @healstar, idk i saw nothing as your filename";
-                if (!getPromptInputText()) {
-                    openPrompt("Exported.. But", "Aw. Such an inconvenience", closePrompt, "It looks like the file name text was empty, probably something went wrong. But it's okay. You still have your file :D")
+                if (getPromptInputText().trim() === "") {
+                    openPrompt("Error", "Okay", closePrompt, "No file name entered");
                 }
                 link.href = canvas.toDataURL();
                 link.click();
