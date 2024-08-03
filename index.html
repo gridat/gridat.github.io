@@ -324,9 +324,10 @@
                 closePrompt();
                 openPrompt("Exported", "Okay, Yippee!", closePrompt, "Your canvas was successfully exported to your device.");
                 const link = document.createElement('a');
-                link.download = getPromptInputText() || "made by @healstar, idk i saw nothing as your filename";
+                link.download = getPromptInputText() || "WHAT HOW";
                 if (getPromptInputText().trim() === "") {
                     openPrompt("Error", "Okay", closePrompt, "No file name entered");
+                    return;
                 }
                 link.href = canvas.toDataURL();
                 link.click();
